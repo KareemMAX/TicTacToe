@@ -67,11 +67,11 @@ class TicTacToe:
 
 def check_branch(max_depth, current_game, current_player, win_player, depth=1):
     if max_depth == 0:
-        return 10
+        return 10 ** -depth
     if current_game.winner == win_player:
-        return 100 ** -depth
+        return 20 ** -depth
     if current_game.winner != ' ':
-        return -100 ** -depth
+        return -25 ** -depth
     r = 0
     for i in range(9):
         game_copy = current_game.quiet_copy()
