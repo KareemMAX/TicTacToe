@@ -1,6 +1,13 @@
 class TicTacToe:
+    """
+    A Tic-Tac-Toe game class
+    """
 
     def __init__(self):
+        """
+        Creates an empty game
+        """
+
         self.map = [' '] * 9
         self.moves = []
         self.winFunction = lambda winner: \
@@ -8,6 +15,10 @@ class TicTacToe:
         self.winner = ' '
 
     def render(self):
+        """
+        Renders the current game in ASCII
+        """
+
         print("{0}|{1}|{2}".format(self.map[0], self.map[1], self.map[2]))
         print("------")
         print("{0}|{1}|{2}".format(self.map[3], self.map[4], self.map[5]))
@@ -15,6 +26,20 @@ class TicTacToe:
         print("{0}|{1}|{2}".format(self.map[6], self.map[7], self.map[8]))
 
     def play(self, player, pos):
+        """
+        Make a move for a specified player
+
+        Args:
+            player (str): The player making the move
+            pos (int): The location for the player
+
+        Raises:
+            Exception: Illegal player if you have sent a player other than X or O
+
+        Returns:
+            bool: If the move is valid it will return True, False otherwise
+        """
+
         if not (player == 'O' or player == 'X'):
             raise Exception("Illegal player {}".format(player))
 
@@ -34,6 +59,13 @@ class TicTacToe:
             return False
 
     def check_win(self):
+        """
+        Checks if there is a winner for the current game
+
+        Returns:
+            str: Returns the winner of the game or a blank space if there is no winner
+        """
+
         for i in range(3):
             # Vertical
             if self.map[i] != ' ':
@@ -51,6 +83,13 @@ class TicTacToe:
         return ' '
 
     def quiet_copy(self):
+        """
+        Makes a copy of the current game
+
+        Returns:
+            TicTacToe: A copy of the current game
+        """
+
         tictactoe = TicTacToe()
         tictactoe.map = self.map.copy()
         tictactoe.winFunction = lambda x: x
@@ -59,6 +98,15 @@ class TicTacToe:
 
     @staticmethod
     def other_player(current_player):
+        """Gets the opponent player
+
+        Args:
+            current_player (str): The current player
+
+        Returns:
+            str: The opponent
+        """
+
         if current_player == 'X':
             return 'O'
         if current_player == 'O':
@@ -66,6 +114,20 @@ class TicTacToe:
 
 
 def check_branch(max_depth, current_game, current_player, win_player, depth=1):
+    """
+    Brute forcing a branch of possible moves
+
+    Args:
+        max_depth (int): Max moves the algorithm can think up ahead
+        current_game (TicTacToe): The current game
+        current_player (str): The current player
+        win_player (str): The player who should win
+        depth (int, optional): The current depth. Defaults to 1.
+
+    Returns:
+        float: The score of the current branch
+    """
+
     if max_depth == 0:
         return 10 ** -depth
     if current_game.winner == win_player:
@@ -82,6 +144,15 @@ def check_branch(max_depth, current_game, current_player, win_player, depth=1):
 
 
 def play_bot(current_game):
+    """
+    The bot logic
+
+    Args:
+        current_game (TicTacToe): The current game
+
+    Returns:
+        int: The bot move
+    """
     # Bot logic
     branch_wins = [0] * 9
     for i in range(9):
