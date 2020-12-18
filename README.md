@@ -23,6 +23,7 @@ It should win most games.
     ```
 
 5. Now you can play the game, the output will be like this:
+
     ![Screenshot 1](/img/screenshot1.png)
 
     You can play by writing the location you want to play in as demonstrated in the screenshot above
